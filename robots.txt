@@ -1,0 +1,24 @@
+# robots.txt для WordPress оптимизация
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/themes/my-custom-theme/inc/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /wp-login.php
+Disallow: /wp-signup.php
+Disallow: /wp-register.php
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /wp-config.php
+Disallow: /wp-trackback.php
+Disallow: /wp-comments-post.php
+
+# Разрешаем основные разделы
+Allow: /wp-content/uploads/
+Allow: /wp-content/themes/my-custom-theme/assets/
+
+# Карта сайта (если есть)
+# Sitemap: http://localhost:8000/sitemap.xml

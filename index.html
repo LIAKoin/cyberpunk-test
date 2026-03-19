@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            @font-face {
+                font-family: "Archangelsk";
+                src: url("/fonts/archangelsk.woff2") format("woff2");
+                font-weight: normal;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                line-height: 1.5;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                height: 100%;
+            }
+
+            .header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 2;
+            }
+
+            .header__inner {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .header__socials {
+                display: flex;
+                flex-direction: row;
+                gap: 40px;
+            }
+
+            .header__link {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header__link img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .header__logo {
+                display: block;
+                width: 296px;
+                height: auto;
+            }
+
+            .hero {
+                position: relative;
+                isolation: isolate;
+                min-height: 1000px;
+                background: #000;
+                overflow: hidden;
+            }
+
+            .hero__media {
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+            }
+
+            .hero__background {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0;
+                transition: opacity 800ms ease;
+                will-change: opacity;
+            }
+
+            .hero__background.is-active {
+                opacity: 1;
+            }
+
+            .hero > .container {
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                min-height: inherit;
+            }
+
+            .hero__content {
+                max-width: 624px;
+                padding: 70px;
+                margin-bottom: 0;
+                background: #f8f200;
+            }
+
+            .hero__title {
+                font-family: "Archangelsk";
+                font-weight: 400;
+                font-size: 62px;
+                line-height: 100%;
+            }
+
+            .hero__action {
+                font-size: 24px;
+                line-height: 40px;
+                padding: 20px 50px;
+                margin-top: 25px;
+            }
+
+            @media (max-width: 767px) {
+                .header__inner {
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 24px;
+                    padding: 20px 0 30px;
+                }
+
+                .header__socials {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 28px;
+                }
+
+                .header__logo {
+                    width: min(100%, 200px);
+                }
+
+                .hero {
+                    min-height: 763px;
+                    overflow: visible;
+                    margin-bottom: 50px;
+                }
+
+                .hero > .container {
+                    justify-content: center;
+                    padding: 0;
+                }
+
+                .hero__content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    max-width: none;
+                    width: 100%;
+                    padding: 30px 20px;
+                    margin-bottom: -50px;
+                }
+
+                .hero__title {
+                    font-size: 30px;
+                    text-align: center;
+                }
+
+                .hero__action {
+                    font-size: 20px;
+                    line-height: 1;
+                    padding: 18px 36px;
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .hero__background {
+                    transition: none;
+                }
+            }
+        </style>
+        <link
+            rel="preload"
+            as="style"
+            onload="
+                this.onload = null;
+                this.rel = 'stylesheet';
+            "
+            href="./src/_reset.scss"
+        />
+        <link
+            rel="preload"
+            as="style"
+            onload="
+                this.onload = null;
+                this.rel = 'stylesheet';
+            "
+            href="./src/style.scss"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cyberpunk WP</title>
+        <meta
+            name="description"
+            content="Cyberpunk 2077 - игра доступна на всех платформах. Розыгрыш Xbox Series X и PS5, полное погружение с HP, комплекты игры"
+        />
+        <meta property="og:title" content="Cyberpunk 2077 - Доступно на всех платформах" />
+        <meta property="og:description" content="Играй и выигрывай консоли" />
+        <meta property="og:image" content="/src/assets/images/image1-pc.webp" />
+        <meta property="og:type" content="website" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <img
+                        class="header__logo"
+                        src="/src/assets/icons/CyberpunkLogo.svg"
+                        alt="Cyberpunk 2077"
+                        width="296"
+                        height="74"
+                    />
+                    <nav class="header__socials">
+                        <a
+                            href="https://www.youtube.com/"
+                            class="header__link"
+                            aria-label="YouTube"
+                        >
+                            <img
+                                src="./src/assets/icons/youtube.svg"
+                                alt="YouTube"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                        <a href="https://vk.com/" class="header__link" aria-label="VK">
+                            <img src="./src/assets/icons/vk.svg" alt="VK" width="30" height="30" />
+                        </a>
+                        <a
+                            href="https://www.facebook.com/"
+                            class="header__link"
+                            aria-label="Facebook"
+                        >
+                            <img
+                                src="./src/assets/icons/facebook.svg"
+                                alt="Facebook"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                        <a href="https://x.com/" class="header__link" aria-label="X">
+                            <img
+                                src="./src/assets/icons/twitter.svg"
+                                alt="X"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                        <a href="https://www.twitch.tv/" class="header__link" aria-label="Twitch">
+                            <img
+                                src="./src/assets/icons/twitch.svg"
+                                alt="Twitch"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                        <a
+                            href="https://www.instagram.com/"
+                            class="header__link"
+                            aria-label="Instagram"
+                        >
+                            <img
+                                src="./src/assets/icons/instagram.svg"
+                                alt="Instagram"
+                                width="30"
+                                height="30"
+                            />
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero__media" aria-hidden="true">
+                    <img
+                        class="hero__background is-active"
+                        src="/src/assets/backgrounds/bg1-pc.webp"
+                        alt=""
+                        srcset="
+                            /src/assets/backgrounds/bg1-mobile.webp  767w,
+                            /src/assets/backgrounds/bg1-tablet.webp 1280w,
+                            /src/assets/backgrounds/bg1-pc.webp     1281w
+                        "
+                        sizes="100vw"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                    />
+                    <img class="hero__background" alt="" decoding="async" />
+                </div>
+                <div class="container">
+                    <div class="hero__content cropped">
+                        <h1 class="hero__title">Доступно на всех платформах</h1>
+                        <button class="hero__action button button--dark" type="button">
+                            Узнать больше
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about">
+                <div class="container">
+                    <div class="about__body">
+                        <div class="about__content section-stack">
+                            <h2 class="section-title">Найт-Сити изменит тебя навсегда!</h2>
+                            <p class="section-text">
+                                <span class="text-accent">Cyberpunk 2077</span>
+                                — приключенческая ролевая игра, действие которой происходит в
+                                мегаполисе Найт-Сити, где власть, роскошь и модификации тела ценятся
+                                выше всего. Ты играешь за V, наёмника в поисках устройства,
+                                позволяющего обрести бессмертие. Ты сможешь менять киберимпланты,
+                                навыки и стиль игры своего персонажа, исследуя открытый мир, где
+                                твои поступки влияют на ход сюжета и всё, что тебя окружает.
+                            </p>
+                        </div>
+                        <div class="galery">
+                            <picture class="galery__picture galery__picture--small">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/galery/photo1-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/galery/photo1-tablet.webp"
+                                />
+                                <img
+                                    src="/src/assets/galery/photo1-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 50vw, 31vw"
+                                    alt="Фрагмент игрового мира Cyberpunk 2077"
+                                    class="galery__item cropped"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                            <picture class="galery__picture galery__picture--small">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/galery/photo2-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/galery/photo2-tablet.webp"
+                                />
+                                <img
+                                    src="/src/assets/galery/photo2-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 50vw, 31vw"
+                                    alt="Неоновый городской пейзаж Cyberpunk 2077"
+                                    class="galery__item cropped"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                            <picture class="galery__picture galery__picture--large">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/galery/photo3-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/galery/photo3-tablet.webp"
+                                />
+                                <img
+                                    src="/src/assets/galery/photo3-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 100vw, 66vw"
+                                    alt="Персонажи Cyberpunk 2077"
+                                    class="galery__item cropped"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contest">
+                <div class="contest__transition section-transition" aria-hidden="true"></div>
+                <div class="container">
+                    <div class="contest__body">
+                        <div class="contest__layout">
+                            <div class="contest__intro section-stack">
+                                <h2 class="contest__title section-title">
+                                    <img src="./src/assets/icons/bonus.svg" alt="Bonus" />
+                                    <span>Играй и выигрывай!</span>
+                                </h2>
+                                <p class="section-text">
+                                    Играй в
+                                    <span class="text-accent">Cyberpunk 2077</span>
+                                    и получи возможность выиграть консоль
+                                    <span class="text-accent">Xbox Series X</span>
+                                    или
+                                    <span class="text-accent">Sony PlayStation 5</span>! Заполни
+                                    форму ниже и приложи скриншот о покупке игры. Итоги розыгрыша
+                                    будут подведены 1 февраля. Удачи! ;)
+                                </p>
+                            </div>
+                            <div class="contest__content section-stack">
+                                <form action="" class="contest-form" id="feedback-form">
+                                    <input
+                                        class="contest-form__input"
+                                        type="text"
+                                        name="name"
+                                        placeholder="Как тебя зовут?"
+                                        aria-label="Как тебя зовут?"
+                                        required
+                                    />
+                                    <input
+                                        class="contest-form__input"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Твой е-mail"
+                                        aria-label="Твой е-mail"
+                                        required
+                                    />
+                                    <label
+                                        class="contest-form__file"
+                                        aria-label="Прикрепить скриншот"
+                                        for="myFile"
+                                    >
+                                        <span class="contest-form__file-title"
+                                            >Прикрепить скриншот</span
+                                        >
+                                        <span class="contest-form__file-rules"
+                                            >.png / .jpg / .pdf</span
+                                        >
+                                        <input
+                                            type="file"
+                                            id="myFile"
+                                            name="screenshot"
+                                            accept=".png,.jpg,.jpeg,.pdf"
+                                            required
+                                        />
+                                    </label>
+                                    <button
+                                        class="contest-form__button button button--light"
+                                        type="submit"
+                                        aria-label="Отправить"
+                                    >
+                                        Отправить
+                                    </button>
+                                    <div class="contest-form__checkbox">
+                                        <input
+                                            class="contest-form__checkbox-input"
+                                            type="checkbox"
+                                            name="agreement"
+                                            value="yes"
+                                            id="agreement"
+                                            required
+                                        />
+                                        <label class="contest-form__checkbox-label" for="agreement">
+                                            Согласен на обработку персональных данных
+                                        </label>
+                                    </div>
+                                </form>
+                                <div id="form-errors" class="contest-form__errors"></div>
+                            </div>
+                            <picture class="contest__picture">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/images/image1-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/images/image1-tablet.webp"
+                                />
+                                <img
+                                    class="contest__image"
+                                    src="/src/assets/images/image1-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 50vw, 36vw"
+                                    alt="Призы Xbox Series X и PlayStation 5"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="immersion">
+                <div class="immersion__transition section-transition" aria-hidden="true"></div>
+                <div class="container">
+                    <div class="immersion__body">
+                        <div class="immersion__media section-stack">
+                            <picture class="immersion__picture">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/images/image2-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/images/image2-tablet.webp"
+                                />
+                                <img
+                                    class="immersion__image"
+                                    src="/src/assets/images/image2-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 100vw, 49vw"
+                                    alt="HP x Cyberpunk 2077"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                            <picture class="immersion__picture">
+                                <source
+                                    media="(max-width: 767px)"
+                                    srcset="/src/assets/images/image3-mobile.webp"
+                                />
+                                <source
+                                    media="(max-width: 1280px)"
+                                    srcset="/src/assets/images/image3-tablet.webp"
+                                />
+                                <img
+                                    class="immersion__image"
+                                    src="/src/assets/images/image3-pc.webp"
+                                    sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1280px) 100vw, 49vw"
+                                    alt="Монитор HP"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </picture>
+                        </div>
+
+                        <div class="immersion__content section-stack">
+                            <h2 class="section-title">Полное погружение вместе с HP</h2>
+                            <p class="section-text">
+                                Погрузись в современные экшен-игры с реалистичным изображением с
+                                помощью монитора с диагональю 23,8 дюйма, созданном для отображения
+                                максимально насыщенных цветов. Успевай реагировать на любые события
+                                с временем отклика 1 мс и частотой в 144 Гц!
+                            </p>
+                            <ul class="feature-list" role="list">
+                                <li class="feature-list__item">
+                                    <img src="./src/assets/icons/paint.svg" alt="paint" />
+                                    <p>Яркие насыщенные цвета</p>
+                                </li>
+                                <li class="feature-list__item">
+                                    <img src="./src/assets/icons/stars.svg" alt="stars" />
+                                    <p>Кристальная четкость изображения</p>
+                                </li>
+                                <li class="feature-list__item">
+                                    <img src="./src/assets/icons/motion.svg" alt="motion" />
+                                    <p>Быстрые движения и плавный геймплей</p>
+                                </li>
+                            </ul>
+                            <button class="immersion__button button button--dark" type="button">
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="purchase" id="purchase">
+                <div class="purchase__layout">
+                    <div class="purchase__media">
+                        <picture class="purchase__picture">
+                            <source
+                                media="(max-width: 767px)"
+                                srcset="/src/assets/images/image4-mobile.webp"
+                            />
+                            <source
+                                media="(max-width: 1280px)"
+                                srcset="/src/assets/images/image4-tablet.webp"
+                            />
+                            <img
+                                class="purchase__image"
+                                src="/src/assets/images/image4-pc.webp"
+                                sizes="(max-width: 767px) 100vw, (max-width: 1280px) 100vw, 50vw"
+                                alt="HP monitor"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </picture>
+                    </div>
+
+                    <div class="purchase__content">
+                        <div class="purchase__content-inner section-stack">
+                            <h2 class="section-title">Купить игру Cyberpunk 2077</h2>
+                            <div class="purchase__lists">
+                                <h3 class="purchase__list-title text-accent">В комплект входит:</h3>
+                                <ul class="feature-list purchase__list">
+                                    <li class="feature-list__item">
+                                        <img src="./src/assets/icons/disk.svg" alt="disk" />
+                                        <p>Футляр с игровыми дисками</p>
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <img src="./src/assets/icons/block.svg" alt="block" />
+                                        <p>Футляр с кодом для загрузки игры и дисками (pc)</p>
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <img
+                                            src="./src/assets/icons/collections.svg"
+                                            alt="collections"
+                                        />
+                                        <p>Справочник с информацией об игровом мире</p>
+                                    </li>
+                                </ul>
+                                <h3 class="purchase__list-title text-accent">
+                                    Выберите платформу:
+                                </h3>
+                                <ul class="purchase__platforms">
+                                    <li class="feature-list__item">
+                                        <img src="./src/assets/icons/PC.svg" alt="PC" />
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <img src="./src/assets/icons/XboxLogo.svg" alt="XboxLogo" />
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <img
+                                            src="./src/assets/icons/StadiaLogo.svg"
+                                            alt="StadiaLogo"
+                                        />
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <img
+                                            src="./src/assets/icons/PlaystationLogo.svg"
+                                            alt="PlaystationLogo"
+                                        />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__top">
+                <div class="container">
+                    <div class="footer__brand">
+                        <img
+                            src="./src/assets/icons/CyberpunkLogo.svg"
+                            alt="Cyberpunk 2077"
+                            width="296"
+                            height="74"
+                        />
+                    </div>
+                    <div class="footer__partner">
+                        <img
+                            src="./src/assets/icons/cdprLogo.svg"
+                            alt="CD Projekt Red"
+                            width="172"
+                            height="74"
+                        />
+                    </div>
+                    <div class="footer__links">
+                        <a href="#" class="footer__link">Лицензия</a>
+                        <a href="#" class="footer__link">Политика конфиденциальности</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="footer__bottom-inner">
+                        <div class="footer__copyright">
+                            CD PROJEKT®, Cyberpunk®, Cyberpunk 2077®
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div id="success-modal" class="modal">
+            <div class="modal__overlay"></div>
+            <div class="modal__content">
+                <button class="modal__close" aria-label="Закрыть">×</button>
+                <div class="modal__icon">✅</div>
+                <h3 class="modal__title">Всё пучком!</h3>
+                <p class="modal__message">Форма заполнена верно. Сейчас всё улетит, но попозже.</p>
+                <button class="modal__button">Ок, жду</button>
+            </div>
+        </div>
+
+        <script type="module" src="./src/main.js"></script>
+    </body>
+</html>
